@@ -1,0 +1,289 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>总结 &mdash; OCR  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/hacks.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="prev" title="重点模型" href="Model.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OCR
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Purpose.html">目的</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StartVersion.html">入门版</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="DetailVersion.html">细节版</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Application.html">应用综述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Technology.html">技术基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html">重点模型</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">总结</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pixellink">一. PixelLink 网络调研：</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1. 移植细节：</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2. 移植分析：</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">二. 当前挑战：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">二. 未来机遇：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OCR</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="DetailVersion.html">细节版</a> &raquo;</li>
+        
+      <li>总结</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/opportunity.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>总结<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="pixellink">
+<h2>一. PixelLink 网络调研：<a class="headerlink" href="#pixellink" title="永久链接至标题">¶</a></h2>
+<img alt="_images/pl_research.png" src="_images/pl_research.png" />
+<p><span class="small">上图是PixelLink网络调研表格输出，对应的网址请看页尾的注释。</span></p>
+<div class="section" id="id2">
+<h3>1. 移植细节：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p>网络的源码是从论文提供的官方 github 中获取，同时可移植性测试是在 <strong>MLU100，V8.2.1</strong> 软件栈中进行。</p></li>
+<li><p>目前不支持算子为 <strong>StrideSlice</strong> 。主要在网络的最后一层，其作用是对 <strong>五维 tensor 进行切分</strong> ，得到所需要的四维 tensor。根据源码分析，可通过 <strong>修改算子实现</strong> 解决此问题。</p></li>
+<li><p>目前没有确切的网络移植需求以及客户的具体网络实现，因此还 <strong>未进行精度和性能的评测</strong> 。</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h3>2. 移植分析：<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">文字检测</span></code> ：PixelLink 是文字检测领域中比较常用的一个网络框架。其中 backbone 为 <strong>SSD 网络</strong> ，而 MLU 对 SSD 已有适配，因此 PixelLink 对 MLU 来说 <strong>可移植性强</strong> 。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">文字识别</span></code> ：当前通用的文字时别算法采用了 <strong>RNN 回归网络</strong> ，而 MLU 之前也有成功的 RNN 网络的落地（百度语音项目）。</p></li>
+</ul>
+<p><span class="py">综上所述，MLU产品适合进入OCR领域，进行相关网络的适配工作。同时根据已有的经验和调研分析，可以提高适配后网络的性能同时保证精度。</span></p>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>二. 当前挑战：<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p>首先，它与传统 OCR（光学字符识别） 有所区别，因自然场景之中文字变化非常之多，如下图所示：左边是一张典型的 <strong>扫描文档图像</strong>，右边则是 <strong>自然场景</strong> 中采集的多张图像。</p>
+<img alt="_images/challenge-1.png" src="_images/challenge-1.png" />
+<p><strong>通过对比可以发现:</strong></p>
+<ul class="simple">
+<li><p>左图的背景非常 <strong>干净</strong>，右图的背景非常 <strong>杂乱</strong>；</p></li>
+<li><p>左边字体非常 <strong>规整</strong>，右边则 <strong>千变万化</strong>；</p></li>
+<li><p>左边布局较为 <strong>平整统一</strong>，右边则 <strong>多元复杂，缺乏规范</strong>；</p></li>
+<li><p>左边 <strong>颜色单调</strong>，右边 <strong>颜色种类繁多</strong>。</p></li>
+</ul>
+<p>目前来看，深度学习时代之下的场景文字检测与识别技术依然存在巨大挑战，其主要体现在以下 <strong>3 个方面</strong>：</p>
+<p><code class="docutils literal notranslate"><span class="pre">文字的差异性</span></code> ：存在着语言、字体、方向、排列等各种各样的形态；</p>
+<img alt="_images/challenge-2.png" src="_images/challenge-2.png" />
+<p><code class="docutils literal notranslate"><span class="pre">背景的复杂性</span></code> ：比如几乎无法区分的元素（标志、篱笆、墙砖、草地等）；</p>
+<img alt="_images/challenge-3.png" src="_images/challenge-3.png" />
+<p><code class="docutils literal notranslate"><span class="pre">干扰的多样性</span></code> ：诸如噪声、模糊、失真、低分辨率、光照不均匀、部分遮挡等情况。</p>
+<img alt="_images/challenge-4.png" src="_images/challenge-4.png" />
+</div>
+<div class="section" id="id5">
+<h2>二. 未来机遇：<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<p>相应而言，针对上述挑战，文字检测与识别具体研究有着以下 <strong>4 个技术趋势</strong> ：</p>
+<ol class="arabic simple">
+<li><p>设计更强大的模型；</p></li>
+<li><p>识别多方向、弯曲文字；</p></li>
+<li><p>识别多语言文字；</p></li>
+<li><p>合成更丰富逼真的数据集。</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>PixelLink 网络调研相关：</p>
+<ol class="arabic simple">
+<li><p>论文地址：<a class="reference external" href="https://arxiv.org/pdf/1801.01315.pdf">https://arxiv.org/pdf/1801.01315.pdf</a></p></li>
+<li><p>源码地址：<a class="reference external" href="https://github.com/ZJULearning/pixel_link">https://github.com/ZJULearning/pixel_link</a></p></li>
+<li><p>相关论文：<a class="reference external" href="https://arxiv.org/pdf/1703.06520.pdf">https://arxiv.org/pdf/1703.06520.pdf</a></p></li>
+<li><p>原理解析：<a class="reference external" href="https://zhuanlan.zhihu.com/p/38171172">https://zhuanlan.zhihu.com/p/38171172</a></p></li>
+</ol>
+<p>相关网址：</p>
+<ol class="arabic simple">
+<li><p>深度学习时代的文字检测与识别技术： <a class="reference external" href="https://zhuanlan.zhihu.com/p/51725259">https://zhuanlan.zhihu.com/p/51725259</a></p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="Model.html" class="btn btn-neutral float-left" title="重点模型" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, LYV
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

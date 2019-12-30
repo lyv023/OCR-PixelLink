@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>技术基础 &mdash; OCR  文档</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
+        <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/hacks.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
+    <link rel="next" title="重点模型" href="Model.html" />
+    <link rel="prev" title="应用综述" href="Application.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> OCR
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Purpose.html">目的</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Introduction.html">前言</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Outline.html">目录</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StartVersion.html">入门版</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="DetailVersion.html">细节版</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Application.html">应用综述</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">技术基础</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">一.  文本检测的评测方法：</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#deteval">1. DetEval 方法</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#iou">2. IOU 方法</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">二. 数据集：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">三. 基础网络：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">四. 基础模型：</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">1. 文本检测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2. 文本识别</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">3. 端到端模型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html">重点模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="opportunity.html">总结</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Conclusion.html">总结</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">OCR</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="DetailVersion.html">细节版</a> &raquo;</li>
+        
+      <li>技术基础</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/Technology.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1>技术基础<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="id2">
+<h2>一.  文本检测的评测方法：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>文本图像定位分为 Challenge 1、2 和 4，视频中的图像定位s是 Challenge 3。主要介绍Challenge 1、2 和 4 的异同：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">1</span></code> (Born-Digital)的数据来源于 <strong>电脑制作</strong>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">2</span></code> 主要是来源于用户有意识的 <strong>对焦拍摄</strong> 的图像。比如一些翻译的场景，这些场景中文字基本是对焦好的且水平的；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">4</span></code> 主要来源也是用户拍摄，但是这些照片的拍摄是 <strong>比较随意的场景</strong> 。通常情况下这些图片里的文字角度、清晰度、大小等情况十分复杂。</p></li>
+</ul>
+<p><span class="py">针对不同的挑战，有不同的评测方法；Challenges 1 和 2 使用的是 DetEva ；Challenges 4 通过 IoU 来判定算法的 recall、precision 的指标。</span></p>
+<div class="section" id="deteval">
+<h3>1. DetEval 方法<a class="headerlink" href="#deteval" title="永久链接至标题">¶</a></h3>
+<p><strong>recallMat</strong> 和 <strong>precisionMat</strong> 中存储的是每个检测框的召回率和准确率，计算方法为：</p>
+<div class="math notranslate nohighlight">
+\[\text { recall } M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(g t_{i}\right)}\]</div>
+<div class="math notranslate nohighlight">
+\[\text { precision } M a t_{i, j}=\frac{\text {area}\left(\text {inter}\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {det}_{j}\right)}\]</div>
+<p>其中 gt 表示标准框，det 表示检测框。area() 函数表示求矩形的 <strong>面积</strong>，inter()函数表示求两个矩形的 <strong>交集</strong>。</p>
+<p><strong>DetEval 方法考虑到三种情况，分别是图 a、b 和 c 中的三种。</strong></p>
+<p>在考虑三种情况前，先进行以下定义：</p>
+<ol class="arabic simple">
+<li><p>定义两个阈值 <cite>r</cite> 和 <cite>p</cite> ，r 表示判断召回率的阈值 0.8，p 表示判断准确率的阈值 0.4。</p></li>
+<li><p>定义 <cite>RecallValue</cite> 和 <cite>PrecisionValue</cite>，且初始值为 0。</p></li>
+<li><p>召回率 <cite>Recall</cite> 和 准确率 <cite>Precision</cite> 分别为最终的 RecallValue 除以标准框数量和 PrecisionValue 除以检测框数量。</p></li>
+</ol>
+<img alt="_images/deteval.png" src="_images/deteval.png" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">one-to-one</span> <span class="pre">matches</span> <span class="pre">(a)</span></code> ：表示 <strong>一个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-one 的情况，若满足，就将 RecallValue 和 PrecisionValue 的数值加 <strong>1</strong>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">one-to-many</span> <span class="pre">matches</span> <span class="pre">(b)</span></code> ：表示 <strong>一个标准框对应多个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-many 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong>，PrecisionValue 值加上 <strong>0.8</strong> * <a href="#id3"><span class="problematic" id="id4">**</span></a>many**（对应检测框的数目）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">many-to-one</span> <span class="pre">matches</span> <span class="pre">(c)</span></code> ：表示 <strong>多个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 many-to-one 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong> * <strong>many**（对应检测框的数目），PrecisionValue 值加上 **0.8</strong>。</p></li>
+</ul>
+<p>最终评价指标：F1-Score，为 Recall 和 Precision 的 <strong>调和平均数</strong>。公式如下：</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{F} 1=\frac{2 * P * R}{P+R}\]</div>
+</div>
+<div class="section" id="iou">
+<h3>2. IOU 方法<a class="headerlink" href="#iou" title="永久链接至标题">¶</a></h3>
+<p>在 <strong>iouMat</strong> 中，统计大于 0.5 的个数，然后除以标准框的个数得到 Recall，除以检测框的个数得到 Precision。然后通过 <strong>F1-Score</strong> 方法得到最终评价指标 F1。</p>
+<div class="math notranslate nohighlight">
+\[i o u M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {union}\left(g t_{i}, d e t_{j}\right)\right)}\]</div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>二. 数据集：<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<img alt="_images/dataset.png" src="_images/dataset.png" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ICDAR2015(IC15)</span></code></p></li>
+</ul>
+<p>IC15 的 Challenge 4 是 <strong>检测任意方向场景文本</strong> 最常用的基准。它由两组组成:训练和测试，分别包含1000和500张图像。
+图像是使用 Google Glass 获取的，不需要考虑视点、位置或帧质量。
+长度超过3个字符的可读拉丁语文字才会被标注为四边形。</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ICDAR2013(IC13)</span></code></p></li>
+</ul>
+<p>IC13 是另一个被广泛使用的场景文本检测基准，包含训练图片229张，测试图片233张。
+这个数据集中的 <strong>文本实例大多是水平的，单词被标注为矩形。</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">MSRA-TD500(TD500)</span></code></p></li>
+</ul>
+<p>TD500中的文本也是任意方向的，但比IC15中的文本要长得多，因为它们是用 <strong>行注释</strong> 的。
+TD500总共包含500张图片，300张用于培训，200张用于测试。中英文都有。</p>
+</div>
+<div class="section" id="id6">
+<h2>三. 基础网络：<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">特征提取网络</span></code> ：对图像中的文本进行特征提取，可来源于通用场景的图像分类模型。例如，<strong>VGGNet，ResNet、InceptionNet</strong> 等；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">特定功能网络</span></code> ：例如，适合提取图像细节特征的 <strong>FCN 全卷积网络</strong>，适合图像校正的 <strong>STN 空间变换网络</strong> 等；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">基础检测网络</span></code> ：侧重检测精度的 <strong>Faster-rcnn</strong> 和侧重检测速度的 <strong>SSD</strong> 网络。</p></li>
+</ul>
+</div>
+<div class="section" id="id7">
+<h2>四. 基础模型：<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<img alt="_images/basicmodel.png" src="_images/basicmodel.png" />
+<div class="section" id="id8">
+<h3>1. 文本检测<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<p>近年来出现了各种基于深度学习的技术解决方案。它们从 <strong>特征提取、区域建议网络(RPN)、多目标协同训练、Loss改进、非极大值抑制（NMS）、半监督学习</strong> 等角度对常规物体检测方法进行改造，
+极大提升了自然场景图像中文本检测的准确率。例如：</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CTPN</span></code> ：用 <strong>BLSTM</strong> 模块提取字符所在图像 <strong>上下文特征</strong> ，以提高文本块识别精度。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">RRPN</span></code> ：文本框标注采用 <strong>BBOX +方向角度值</strong> 的形式，模型中产生出可旋转的文字区域候选框，并在 <strong>边框回归计算</strong> 过程中找到待测文本行的倾斜角度。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DMPNet</span></code> ：使用 <strong>四边形（非矩形）标注文本框</strong>，来更紧凑的包围文本区域。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SegLink</span></code> ：将单词 <strong>切割为更易检测的小文字块</strong> ，再 <strong>预测邻近连接</strong> 将小文字块连成词。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PixelLink</span></code> ：通过 <strong>实例分割检测文本</strong> ，预测的 <strong>正像素</strong> 通过预测的 <strong>正链接</strong> 加入到文本实例中，然后直接从分割结果中提取边界框。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EAST</span></code> : 使用具有 <strong>位置意识的NMS（非最大值抑制）</strong> 进行非常密集的预测。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TextBoxes</span></code> ：调整了文字区域参考框的 <strong>长宽比例</strong>，并将特征层 <strong>卷积核调整为长方形</strong>，从而更适合检测出细长型的文本行。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FTSN</span></code> ：使用 <strong>Mask-NMS</strong> 代替传统 BBOX 的 NMS 算法来过滤候选框。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">WordSup</span></code> ：采用 <strong>半监督学习策略</strong>，用单词级标注数据来训练字符级文本检测模型。</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="id9">
+<h3>2. 文本识别<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CRNN</span></code> 是目前较为流行的图文识别模型，可识别较长的文本序列。利用 <strong>BLSTM</strong> 将特征向量进行融合来 <strong>提取字符序列的上下文特征</strong>，然后得到每列特征的概率分布，最后通过 <strong>转录层(CTC rule)</strong> 进行预测得到文本序列。</p></li>
+</ul>
+<img alt="_images/CRNN.jpg" src="_images/CRNN.jpg" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">RARE</span></code> 模型在识别变形的图像文本时效果很好。模型预测过程中，输入图像首先要被送到一个 <strong>空间变换网络</strong> 中做处理，矫正过的图像然后被送入 <strong>序列识别网络</strong> 中得到文本预测结果。</p></li>
+</ul>
+<img alt="_images/RARE.jpg" src="_images/RARE.jpg" />
+</div>
+<div class="section" id="id10">
+<h3>3. 端到端模型<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">FOTS</span></code> 是图像文本检测与识别同步训练、端到端可学习的网络模型。引入了 <strong>旋转感兴趣区域（RoIRotate）</strong>, 可以从卷积特征图中产生出定向的文本区域，从而 <strong>支持倾斜文本</strong> 的识别。</p></li>
+</ul>
+<img alt="_images/FOTS.png" src="_images/FOTS.png" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">STN-OCR</span></code> 是集成了 <strong>图文检测和识别</strong> 功能的端到端可学习模型。在它的检测部分嵌入了一个 <strong>空间变换网络（STN）</strong> 来对原始输入图像进行仿射变换。利用这个空间变换网络，可以对检测到的多个文本块分别执行 <strong>旋转、缩放和倾斜</strong> 等图形矫正动作，从而在后续文本识别阶段得到更好的识别精度。</p></li>
+</ul>
+<img alt="_images/STN-OCR.png" src="_images/STN-OCR.png" />
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>相关网址：</p>
+<ol class="arabic simple">
+<li><p>OCR 竞赛 ICDAR 网址：<a class="reference external" href="https://rrc.cvc.uab.es">https://rrc.cvc.uab.es</a></p></li>
+<li><p>评测指标官方网址：<a class="reference external" href="https://rrc.cvc.uab.es/?com=faq">https://rrc.cvc.uab.es/?com=faq</a></p></li>
+<li><p>DetEval方法：<a class="reference external" href="https://perso.liris.cnrs.fr/christian.wolf/software/deteval/inde">https://perso.liris.cnrs.fr/christian.wolf/software/deteval/inde</a></p></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="Model.html" class="btn btn-neutral float-right" title="重点模型" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Application.html" class="btn btn-neutral float-left" title="应用综述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, LYV
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
