@@ -62,7 +62,7 @@ PixelLink 模型分析
 #. 根据 link positive 将 pixel positive 进行连接，得到 CCs (conected components) 集合。
 #. 根据集合得出分割的实例块，集合中的每个元素代表的就是文本实例。
 
-.. image:: ../Image/link-nu.png
+.. image:: ../Image/Link-nu.png
 :small:`上图是像素A和B分别在 8 个方向 link 链接的示意图`
 
 **连接规则：**

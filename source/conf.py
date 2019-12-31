@@ -17,9 +17,9 @@ sys.path.insert(0, os.path.abspath('.'))
 
 # -- Project information -----------------------------------------------------
 
-project = 'OCR'
-copyright = '2019, LYV'
-author = 'LYV'
+project = 'OCR-PixelLink 调研'
+copyright = '2019, LYH'
+author = 'LYH'
 
 
 # -- General configuration ---------------------------------------------------
