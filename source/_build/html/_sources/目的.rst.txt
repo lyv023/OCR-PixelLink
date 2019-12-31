@@ -5,7 +5,6 @@
 .. toctree::
    :maxdepth: 2
 
-   test2
 
 腾讯信安部在OCR业务上采用的是 Pixel Link 网络，对此领域先前接触较少。因此，为了深入理解客户的上线网络以及对自身能力的提升，本报告将对 OCR 领域以及重点网络（Pixel Link）进行调研。
 

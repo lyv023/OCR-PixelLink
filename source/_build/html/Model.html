@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>重点模型 &mdash; OCR  文档</title>
+  <title>PixelLink 模型分析 &mdash; OCR  文档</title>
   
 
   
@@ -85,23 +85,22 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Purpose.html">目的</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Purpose.html">文档说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Introduction.html">前言</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outline.html">目录</a></li>
 <li class="toctree-l1"><a class="reference internal" href="StartVersion.html">入门版</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="DetailVersion.html">细节版</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Application.html">应用综述</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Technology.html">技术基础</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">重点模型</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">一. 基础工作：</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">二. 网络结构：</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">三. 重点实现：</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PixelLink 模型分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">一. 基础工作：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">二. 网络结构：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">三. 重点实现：</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#linking-pixels-together">1. 连接像素(Linking Pixels Together)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bounding-box-extraction-of-bounding-boxes">2. 提取文本行的 bounding box（Extraction of Bounding Boxes）</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#post-filtering-after-segmentation">3. 实例分割的后处理（Post Filtering after Segmentation）</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">三. 训练技巧：</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id4">四. 训练技巧：</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#instance-balanced-cross-entropy-loss">1. 实例平衡交叉熵损失（Instance-Balanced Cross-Entropy Loss）</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#online-hard-example-mining">2. 在线困难样本挖掘 （Online Hard Example Mining）</a></li>
 </ul>
@@ -111,7 +110,6 @@
 <li class="toctree-l2"><a class="reference internal" href="opportunity.html">总结</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Conclusion.html">总结</a></li>
 </ul>
 
             
@@ -159,7 +157,7 @@
         
           <li><a href="DetailVersion.html">细节版</a> &raquo;</li>
         
-      <li>重点模型</li>
+      <li>PixelLink 模型分析</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -178,21 +176,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="id1">
-<h1>重点模型<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+  <div class="section" id="pixellink">
+<h1>PixelLink 模型分析<a class="headerlink" href="#pixellink" title="永久链接至标题">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>首先将相同实例中的正像素通过正链接连在一起，然后来分割出来，最后直接从分割结果中提取文本边界框，不需要外置回归。
 </pre></div>
 </div>
-<div class="section" id="id2">
-<h2>一. 基础工作：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id1">
+<h2>一. 基础工作：<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h2>
 <img alt="_images/ins_seg.png" src="_images/ins_seg.png" />
 <p><span class="small">上图分别是图像分类、目标定位、语义分割和实力分割的示意图。</span></p>
 <p><strong>实例分割</strong> 是检测和分割每个目标实例；<strong>语义分割</strong> 是为每个像素分配一个类标签。</p>
 </div>
-<div class="section" id="id3">
-<h2>二. 网络结构：<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id2">
+<h2>二. 网络结构：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <img alt="_images/pl_network.png" src="_images/pl_network.png" />
 <p><span class="small">上图是Pixel link 网络结构示意图</span></p>
 <p>论文中给出了两种网络结构：</p>
@@ -205,11 +203,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">对输入图片进行特征提取</span></code> ：主干网络沿用了 <strong>SSD</strong> 网络结构，以 <strong>VGG16</strong> 作为基础网络，并将 VGG16 的最后两个全连接层改成 <strong>卷积层</strong>；</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">提取不同层的特征图</span></code> ：对于 <strong>PixelLink+VGG16 2s</strong> 网络结构：提取了conv2_2, conv3_3, conv4_3, conv5_3, fc_7；</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">对提取后的特征层采用自顶向下的方法进行融合</span></code> ：融合操作包括先向 <strong>上采样</strong>，然后再进行 <strong>add操作</strong>；</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">获得网络输出进行实力分割</span></code> ：包括 <strong>文本/非文本预测和Link预测</strong>，对应输出个数为 2 和 16。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">获得网络输出进行实例分割</span></code> ：包括 <strong>文本/非文本预测和Link预测</strong>，即为 <strong>pixel positive</strong> 和 <strong>link positive</strong> ，分别对应输出的通道数为 2（1*2） 和 16（8*2）。</p></li>
 </ol>
 </div>
-<div class="section" id="id4">
-<h2>三. 重点实现：<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h2>三. 重点实现：<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <img alt="_images/pl_link.png" src="_images/pl_link.png" />
 <p><span class="small">上图是Pixel Link模型结构示意图</span></p>
 <p>具体实现步骤如下：</p>
@@ -225,25 +223,27 @@
 <p><span class="small">上图是 PixelLink 体系结构中链路预测的热力图，代表 8 个方向的链路预测。</span></p>
 <p><strong>连接像素的步骤如下：</strong></p>
 <ol class="arabic simple">
-<li><p>设定阈值(代码中为0.5）得到 pixel positive 集合和 link positive 集合。</p></li>
-<li><p>根据 link positive 将 pixel positive 进行连接，得到CCs(conected compoents)集合。</p></li>
+<li><p>设定阈值（大于0.5），得到 pixel positive 集合和 link positive 集合。</p></li>
+<li><p>根据 link positive 将 pixel positive 进行连接，得到 CCs (conected components) 集合。</p></li>
 <li><p>根据集合得出分割的实例块，集合中的每个元素代表的就是文本实例。</p></li>
 </ol>
+<img alt="_images/link-nu.png" src="_images/link-nu.png" />
+<p><span class="small">上图是像素A和B分别在 8 个方向 link 链接的示意图</span></p>
 <p><strong>连接规则：</strong></p>
 <ul class="simple">
-<li><p>给定两个相邻的 pixel positive，它们之间的 link 预测是由当前 <strong>两个 pixel 共同决定</strong> 的。</p></li>
-<li><p>两个 pixel 连接 (即两个像素属于同一个文本实例) 的前提条件：<strong>two link 中至少有一个 link positive</strong>。</p></li>
+<li><p>给定两个相邻的 pixel positive，它们之间的 link 预测是由当前 <strong>两个 pixel 共同决定</strong> 的。如上图所示，像素 A 和 B 之间的链接 5 和 4 是由像素 A 和 B <strong>共同决定</strong> 的。</p></li>
+<li><p>两个 pixel 连接 (即两个像素属于同一个文本实例) 的前提条件：<strong>two link 中至少有一个 link positive</strong>。如上图所示，连接像素 A 和 B 的前提是链接 5 和 4 中 <strong>至少有一个为 link positive</strong>。</p></li>
 </ul>
-<p><span class="py">对于在文本/非文本预测中很难区分的文本，通过链接预测可以区分开。</span></p>
+<p><span class="maroon">对于在文本/非文本预测中很难区分的文本，通过链接预测可以区分开。</span></p>
 </div>
 <div class="section" id="bounding-box-extraction-of-bounding-boxes">
 <h3>2. 提取文本行的 bounding box（Extraction of Bounding Boxes）<a class="headerlink" href="#bounding-box-extraction-of-bounding-boxes" title="永久链接至标题">¶</a></h3>
 <p><strong>提取文本框步骤：</strong>
 基于上述分割的结果，直接通过 opencv 的 MinAreaRext 提取文本的带方向信息的外接矩形框(即带角度信息)。矩形框的格式为((x,y),(w,h),θ)，分别表示 <strong>中心点坐标，当前bbox的宽和高，旋转角度。</strong></p>
-<p><strong>MinAreaRext方法</strong>：</p>
+<p><strong>MinAreaRext方法</strong></p>
 <img alt="_images/MinArea.png" src="_images/MinArea.png" />
 <p><span class="small">上图表示的是 MinAreaRect 方法， 从图中可以看出此方法在得到的是图形的最小外接四边形。</span></p>
-<p><span class="py">PxielLink 和 SegLink 的区别在于：PixelLink 是直接从分割结果中提取 bbox，而 SegLink 采用的是边框回归。</span></p>
+<p><span class="maroon">PxielLink 和 SegLink 的区别在于：PixelLink 是直接从分割结果中提取 bbox，而 SegLink 采用的是边框回归。</span></p>
 </div>
 <div class="section" id="post-filtering-after-segmentation">
 <h3>3. 实例分割的后处理（Post Filtering after Segmentation）<a class="headerlink" href="#post-filtering-after-segmentation" title="永久链接至标题">¶</a></h3>
@@ -254,9 +254,9 @@
 </ul>
 </div>
 </div>
-<div class="section" id="id5">
-<h2>三. 训练技巧：<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
-<p>总损失函数：</p>
+<div class="section" id="id4">
+<h2>四. 训练技巧：<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
+<p><strong>总损失函数</strong></p>
 <div class="math notranslate nohighlight">
 \[L=\lambda L_{p i x e l}+L_{l i n k}\]</div>
 <div class="section" id="instance-balanced-cross-entropy-loss">
@@ -266,12 +266,21 @@
 \[w_{i}=\frac{B_{t}}{S_{t}}\]</div>
 <div class="math notranslate nohighlight">
 \[B_{i}=\frac{S}{N}, S=\sum_{i}^{N} S_{i}, \forall i \in\{1, \ldots, N\}\]</div>
+<p>公式中 S 代表所有文本框的面积之和, B 表示平均每个文本框的面积。</p>
 </div>
 <div class="section" id="online-hard-example-mining">
 <h3>2. 在线困难样本挖掘 （Online Hard Example Mining）<a class="headerlink" href="#online-hard-example-mining" title="永久链接至标题">¶</a></h3>
 <p>平衡 <strong>正负样本数量</strong> 不同对于训练过程中分类效果的影响。</p>
 <div class="math notranslate nohighlight">
 \[L_{p i x e l}=\frac{1}{(1+r) S} W L_{p i x e l_{-} C E}\]</div>
+<div class="admonition note">
+<p class="admonition-title">注解</p>
+<p>相关网址：</p>
+<ol class="arabic simple">
+<li><p>文本检测之 PixelLink：<a class="reference external" href="https://zhuanlan.zhihu.com/p/38171172">https://zhuanlan.zhihu.com/p/38171172</a></p></li>
+<li><p>PixelLink 论文地址：<a class="reference external" href="https://arxiv.org/pdf/1801.01315.pdf">https://arxiv.org/pdf/1801.01315.pdf</a></p></li>
+</ol>
+</div>
 </div>
 </div>
 </div>

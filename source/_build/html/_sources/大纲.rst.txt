@@ -5,8 +5,4 @@
 .. toctree::
    :maxdepth: 2
 
-   test2
-
-haha
-
 .. index:: 目录

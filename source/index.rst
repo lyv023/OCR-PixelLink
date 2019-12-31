@@ -16,11 +16,3 @@ Welcome to OCR's documentation!
    DetailVersion  
 
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

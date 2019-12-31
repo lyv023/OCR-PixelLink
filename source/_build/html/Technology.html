@@ -38,7 +38,7 @@
   <link rel="stylesheet" href="_static/hacks.css" type="text/css" />
     <link rel="index" title="索引" href="genindex.html" />
     <link rel="search" title="搜索" href="search.html" />
-    <link rel="next" title="重点模型" href="Model.html" />
+    <link rel="next" title="PixelLink 模型分析" href="Model.html" />
     <link rel="prev" title="应用综述" href="Application.html" /> 
 </head>
 
@@ -85,33 +85,26 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="Purpose.html">目的</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Purpose.html">文档说明</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Introduction.html">前言</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Outline.html">目录</a></li>
 <li class="toctree-l1"><a class="reference internal" href="StartVersion.html">入门版</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="DetailVersion.html">细节版</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Application.html">应用综述</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">技术基础</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id2">一.  文本检测的评测方法：</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#deteval">1. DetEval 方法</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#iou">2. IOU 方法</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">二. 数据集：</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">三. 基础网络：</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id7">四. 基础模型：</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">1. 文本检测</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">2. 文本识别</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id10">3. 端到端模型</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">一. 数据集：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">二. 基础网络模块：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">三. 基础模型：</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">1. 文本检测</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2. 文本识别</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">3. 端到端模型</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Model.html">重点模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Model.html">PixelLink 模型分析</a></li>
 <li class="toctree-l2"><a class="reference internal" href="opportunity.html">总结</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Conclusion.html">总结</a></li>
 </ul>
 
             
@@ -183,48 +176,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <div class="section" id="id2">
-<h2>一.  文本检测的评测方法：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
-<p>文本图像定位分为 Challenge 1、2 和 4，视频中的图像定位s是 Challenge 3。主要介绍Challenge 1、2 和 4 的异同：</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">1</span></code> (Born-Digital)的数据来源于 <strong>电脑制作</strong>；</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">2</span></code> 主要是来源于用户有意识的 <strong>对焦拍摄</strong> 的图像。比如一些翻译的场景，这些场景中文字基本是对焦好的且水平的；</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">4</span></code> 主要来源也是用户拍摄，但是这些照片的拍摄是 <strong>比较随意的场景</strong> 。通常情况下这些图片里的文字角度、清晰度、大小等情况十分复杂。</p></li>
-</ul>
-<p><span class="py">针对不同的挑战，有不同的评测方法；Challenges 1 和 2 使用的是 DetEva ；Challenges 4 通过 IoU 来判定算法的 recall、precision 的指标。</span></p>
-<div class="section" id="deteval">
-<h3>1. DetEval 方法<a class="headerlink" href="#deteval" title="永久链接至标题">¶</a></h3>
-<p><strong>recallMat</strong> 和 <strong>precisionMat</strong> 中存储的是每个检测框的召回率和准确率，计算方法为：</p>
-<div class="math notranslate nohighlight">
-\[\text { recall } M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(g t_{i}\right)}\]</div>
-<div class="math notranslate nohighlight">
-\[\text { precision } M a t_{i, j}=\frac{\text {area}\left(\text {inter}\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {det}_{j}\right)}\]</div>
-<p>其中 gt 表示标准框，det 表示检测框。area() 函数表示求矩形的 <strong>面积</strong>，inter()函数表示求两个矩形的 <strong>交集</strong>。</p>
-<p><strong>DetEval 方法考虑到三种情况，分别是图 a、b 和 c 中的三种。</strong></p>
-<p>在考虑三种情况前，先进行以下定义：</p>
-<ol class="arabic simple">
-<li><p>定义两个阈值 <cite>r</cite> 和 <cite>p</cite> ，r 表示判断召回率的阈值 0.8，p 表示判断准确率的阈值 0.4。</p></li>
-<li><p>定义 <cite>RecallValue</cite> 和 <cite>PrecisionValue</cite>，且初始值为 0。</p></li>
-<li><p>召回率 <cite>Recall</cite> 和 准确率 <cite>Precision</cite> 分别为最终的 RecallValue 除以标准框数量和 PrecisionValue 除以检测框数量。</p></li>
-</ol>
-<img alt="_images/deteval.png" src="_images/deteval.png" />
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">one-to-one</span> <span class="pre">matches</span> <span class="pre">(a)</span></code> ：表示 <strong>一个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-one 的情况，若满足，就将 RecallValue 和 PrecisionValue 的数值加 <strong>1</strong>。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">one-to-many</span> <span class="pre">matches</span> <span class="pre">(b)</span></code> ：表示 <strong>一个标准框对应多个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-many 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong>，PrecisionValue 值加上 <strong>0.8</strong> * <a href="#id3"><span class="problematic" id="id4">**</span></a>many**（对应检测框的数目）。</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">many-to-one</span> <span class="pre">matches</span> <span class="pre">(c)</span></code> ：表示 <strong>多个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 many-to-one 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong> * <strong>many**（对应检测框的数目），PrecisionValue 值加上 **0.8</strong>。</p></li>
-</ul>
-<p>最终评价指标：F1-Score，为 Recall 和 Precision 的 <strong>调和平均数</strong>。公式如下：</p>
-<div class="math notranslate nohighlight">
-\[\mathrm{F} 1=\frac{2 * P * R}{P+R}\]</div>
-</div>
-<div class="section" id="iou">
-<h3>2. IOU 方法<a class="headerlink" href="#iou" title="永久链接至标题">¶</a></h3>
-<p>在 <strong>iouMat</strong> 中，统计大于 0.5 的个数，然后除以标准框的个数得到 Recall，除以检测框的个数得到 Precision。然后通过 <strong>F1-Score</strong> 方法得到最终评价指标 F1。</p>
-<div class="math notranslate nohighlight">
-\[i o u M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {union}\left(g t_{i}, d e t_{j}\right)\right)}\]</div>
-</div>
-</div>
-<div class="section" id="id5">
-<h2>二. 数据集：<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h2>
+<h2>一. 数据集：<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
 <img alt="_images/dataset.png" src="_images/dataset.png" />
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ICDAR2015(IC15)</span></code></p></li>
@@ -243,19 +195,62 @@
 <p>TD500中的文本也是任意方向的，但比IC15中的文本要长得多，因为它们是用 <strong>行注释</strong> 的。
 TD500总共包含500张图片，300张用于培训，200张用于测试。中英文都有。</p>
 </div>
-<div class="section" id="id6">
-<h2>三. 基础网络：<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id3">
+<h2>二. 基础网络模块：<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">特征提取网络</span></code> ：对图像中的文本进行特征提取，可来源于通用场景的图像分类模型。例如，<strong>VGGNet，ResNet、InceptionNet</strong> 等；</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">特定功能网络</span></code> ：例如，适合提取图像细节特征的 <strong>FCN 全卷积网络</strong>，适合图像校正的 <strong>STN 空间变换网络</strong> 等；</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">基础检测网络</span></code> ：侧重检测精度的 <strong>Faster-rcnn</strong> 和侧重检测速度的 <strong>SSD</strong> 网络。</p></li>
 </ul>
 </div>
-<div class="section" id="id7">
-<h2>四. 基础模型：<a class="headerlink" href="#id7" title="永久链接至标题">¶</a></h2>
+<div class="section" id="id4">
+<h2>三. 基础模型：<a class="headerlink" href="#id4" title="永久链接至标题">¶</a></h2>
 <img alt="_images/basicmodel.png" src="_images/basicmodel.png" />
-<div class="section" id="id8">
-<h3>1. 文本检测<a class="headerlink" href="#id8" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id5">
+<h3>1. 文本检测<a class="headerlink" href="#id5" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id6">
+<h4>1.1 评测方法：<a class="headerlink" href="#id6" title="永久链接至标题">¶</a></h4>
+<p>OCR 竞赛 ICDAR 中将文本检测按照 <strong>难度不同分为 Challenge1-4</strong> 。其中 <strong>图片中的文本定位</strong> 分为 Challenge 1、2 和 4，<strong>视频中的图像定位</strong> 为 Challenge 3。主要介绍 Challenge 1、2 和 4 的异同：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">1</span></code> (Born-Digital)的数据来源于 <strong>电脑制作</strong>；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">2</span></code> 主要是来源于用户有意识的 <strong>对焦拍摄</strong> 的图像。比如一些翻译的场景，这些场景中文字基本是对焦好的且水平的；</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Challenges</span> <span class="pre">4</span></code> 主要来源也是用户拍摄，但是这些照片的拍摄是 <strong>比较随意的场景</strong> 。通常情况下这些图片里的文字角度、清晰度、大小等情况十分复杂。</p></li>
+</ul>
+<p><span class="maroon">针对不同的挑战，有不同的评测方法；Challenges 1 和 2 使用的是 DetEva ；Challenges 4 通过 IoU 来判定算法的 recall、precision 的指标。</span></p>
+<div class="section" id="deteval">
+<h5>DetEval 方法<a class="headerlink" href="#deteval" title="永久链接至标题">¶</a></h5>
+<p><strong>recallMat</strong> 和 <strong>precisionMat</strong> 中存储的是每个检测框的召回率和准确率，计算方法为：</p>
+<div class="math notranslate nohighlight">
+\[\text { recall } M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(g t_{i}\right)}\]</div>
+<div class="math notranslate nohighlight">
+\[\text { precision } M a t_{i, j}=\frac{\text {area}\left(\text {inter}\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {det}_{j}\right)}\]</div>
+<p>其中 gt 表示标准框，det 表示检测框。area() 函数表示求矩形的 <strong>面积</strong>，inter()函数表示求两个矩形的 <strong>交集</strong>。</p>
+<p><strong>DetEval 方法考虑到三种情况，分别是图 a、b 和 c 中的三种。</strong></p>
+<p>在考虑三种情况前，先进行以下定义：</p>
+<ol class="arabic simple">
+<li><p>定义两个阈值 <cite>r</cite> 和 <cite>p</cite> ，r 表示判断召回率的阈值 0.8，p 表示判断准确率的阈值 0.4。</p></li>
+<li><p>定义 <cite>RecallValue</cite> 和 <cite>PrecisionValue</cite>，且初始值为 0。</p></li>
+<li><p>召回率 <cite>Recall</cite> 和 准确率 <cite>Precision</cite> 分别为最终的 RecallValue 除以标准框数量和 PrecisionValue 除以检测框数量。</p></li>
+</ol>
+<img alt="_images/deteval.png" src="_images/deteval.png" />
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">one-to-one</span> <span class="pre">matches</span> <span class="pre">(a)</span></code> ：表示 <strong>一个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-one 的情况，若满足，就将 RecallValue 和 PrecisionValue 的数值加 <strong>1</strong>。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">one-to-many</span> <span class="pre">matches</span> <span class="pre">(b)</span></code> ：表示 <strong>一个标准框对应多个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-many 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong>，PrecisionValue 值加上 <strong>0.8</strong> * <a href="#id7"><span class="problematic" id="id8">**</span></a>many**（对应检测框的数目）。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">many-to-one</span> <span class="pre">matches</span> <span class="pre">(c)</span></code> ：表示 <strong>多个标准框对应一个检测框</strong>。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 many-to-one 的情况，若满足，则对于 RecallValue 值加上 <strong>0.8</strong> * <strong>many**（对应检测框的数目），PrecisionValue 值加上 **0.8</strong>。</p></li>
+</ul>
+<p>最终评价指标：F1-Score，为 Recall 和 Precision 的 <strong>调和平均数</strong>。公式如下：</p>
+<div class="math notranslate nohighlight">
+\[\mathrm{F} 1=\frac{2 * P * R}{P+R}\]</div>
+</div>
+<div class="section" id="iou">
+<h5>IOU 方法<a class="headerlink" href="#iou" title="永久链接至标题">¶</a></h5>
+<p>在 <strong>iouMat</strong> 中，统计大于 0.5 的个数，然后除以标准框的个数得到 Recall，除以检测框的个数得到 Precision。然后通过 <strong>F1-Score</strong> 方法得到最终评价指标 F1。</p>
+<div class="math notranslate nohighlight">
+\[i o u M a t_{i, j}=\frac{ \text {area(inter }\left.\left(g t_{i}, \text {det}_{j}\right)\right)}{\text {area}\left(\text {union}\left(g t_{i}, d e t_{j}\right)\right)}\]</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h4>1.2 常用模型：<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h4>
 <p>近年来出现了各种基于深度学习的技术解决方案。它们从 <strong>特征提取、区域建议网络(RPN)、多目标协同训练、Loss改进、非极大值抑制（NMS）、半监督学习</strong> 等角度对常规物体检测方法进行改造，
 极大提升了自然场景图像中文本检测的准确率。例如：</p>
 <blockquote>
@@ -272,8 +267,9 @@ TD500总共包含500张图片，300张用于培训，200张用于测试。中英
 </ol>
 </div></blockquote>
 </div>
-<div class="section" id="id9">
-<h3>2. 文本识别<a class="headerlink" href="#id9" title="永久链接至标题">¶</a></h3>
+</div>
+<div class="section" id="id10">
+<h3>2. 文本识别<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">CRNN</span></code> 是目前较为流行的图文识别模型，可识别较长的文本序列。利用 <strong>BLSTM</strong> 将特征向量进行融合来 <strong>提取字符序列的上下文特征</strong>，然后得到每列特征的概率分布，最后通过 <strong>转录层(CTC rule)</strong> 进行预测得到文本序列。</p></li>
 </ul>
@@ -283,8 +279,8 @@ TD500总共包含500张图片，300张用于培训，200张用于测试。中英
 </ul>
 <img alt="_images/RARE.jpg" src="_images/RARE.jpg" />
 </div>
-<div class="section" id="id10">
-<h3>3. 端到端模型<a class="headerlink" href="#id10" title="永久链接至标题">¶</a></h3>
+<div class="section" id="id11">
+<h3>3. 端到端模型<a class="headerlink" href="#id11" title="永久链接至标题">¶</a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">FOTS</span></code> 是图像文本检测与识别同步训练、端到端可学习的网络模型。引入了 <strong>旋转感兴趣区域（RoIRotate）</strong>, 可以从卷积特征图中产生出定向的文本区域，从而 <strong>支持倾斜文本</strong> 的识别。</p></li>
 </ul>
@@ -300,6 +296,7 @@ TD500总共包含500张图片，300张用于培训，200张用于测试。中英
 <li><p>OCR 竞赛 ICDAR 网址：<a class="reference external" href="https://rrc.cvc.uab.es">https://rrc.cvc.uab.es</a></p></li>
 <li><p>评测指标官方网址：<a class="reference external" href="https://rrc.cvc.uab.es/?com=faq">https://rrc.cvc.uab.es/?com=faq</a></p></li>
 <li><p>DetEval方法：<a class="reference external" href="https://perso.liris.cnrs.fr/christian.wolf/software/deteval/inde">https://perso.liris.cnrs.fr/christian.wolf/software/deteval/inde</a></p></li>
+<li><p>OCR技术简介: <a class="reference external" href="https://zhuanlan.zhihu.com/p/45376274">https://zhuanlan.zhihu.com/p/45376274</a></p></li>
 </ol>
 </div>
 </div>
@@ -314,7 +311,7 @@ TD500总共包含500张图片，300张用于培训，200张用于测试。中英
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Model.html" class="btn btn-neutral float-right" title="重点模型" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Model.html" class="btn btn-neutral float-right" title="PixelLink 模型分析" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="Application.html" class="btn btn-neutral float-left" title="应用综述" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

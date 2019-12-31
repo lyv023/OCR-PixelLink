@@ -7,5 +7,5 @@
 
 .. include:: ../special.rst
 
-:py:`暂未开放，敬请期待！`
+:maroon:`暂未开放，敬请期待！`
 
