@@ -8,11 +8,10 @@ Welcome to OCR's documentation!
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
    
-   Purpose
-   Introduction
-   StartVersion
-   DetailVersion  
+   Application
+   Technology
+   Model
+   opportunity
 
 

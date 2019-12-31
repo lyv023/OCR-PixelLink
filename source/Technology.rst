@@ -60,9 +60,7 @@ DetEval 方法
 
 其中 gt 表示标准框，det 表示检测框。area() 函数表示求矩形的 **面积**，inter()函数表示求两个矩形的 **交集**。
 
-**DetEval 方法考虑到三种情况，分别是图 a、b 和 c 中的三种。**
-
-在考虑三种情况前，先进行以下定义：
+**DetEval 方法考虑到三种情况，分别是图 a、b 和 c 中的三种。** 在考虑三种情况前，先进行以下定义：
 
 #. 定义两个阈值 `r` 和 `p` ，r 表示判断召回率的阈值 0.8，p 表示判断准确率的阈值 0.4。
 #. 定义 `RecallValue` 和 `PrecisionValue`，且初始值为 0。
@@ -71,8 +69,8 @@ DetEval 方法
 .. image:: ../Image/deteval.png
 
 * ``one-to-one matches (a)`` ：表示 **一个标准框对应一个检测框**。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-one 的情况，若满足，就将 RecallValue 和 PrecisionValue 的数值加 **1**。
-* ``one-to-many matches (b)`` ：表示 **一个标准框对应多个检测框**。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-many 的情况，若满足，则对于 RecallValue 值加上 **0.8**，PrecisionValue 值加上 **0.8** * **many**（对应检测框的数目）。
-* ``many-to-one matches (c)`` ：表示 **多个标准框对应一个检测框**。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 many-to-one 的情况，若满足，则对于 RecallValue 值加上 **0.8** * **many**（对应检测框的数目），PrecisionValue 值加上 **0.8**。
+* ``one-to-many matches (b)`` ：表示 **一个标准框对应多个检测框**。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 one-to-many 的情况，若满足，则对于 RecallValue 值加上 **0.8**，PrecisionValue 值加上 **0.8** \* many（对应检测框的数目）。
+* ``many-to-one matches (c)`` ：表示 **多个标准框对应一个检测框**。比较 recallMat 和 precisionMat 与阈值大小。判断是否为 many-to-one 的情况，若满足，则对于 RecallValue 值加上 **0.8** \* many（对应检测框的数目），PrecisionValue 值加上 **0.8**。
 
 最终评价指标：F1-Score，为 Recall 和 Precision 的 **调和平均数**。公式如下：
 
